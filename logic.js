@@ -1,20 +1,33 @@
+ethereum.autoRefreshOnNetworkChange = false;
 let BASE_URL = "https://api.coingecko.com/api/v3";
-let AKROPOLIS_MARKET_ENDPOINT = "/coins/markets?vs_currency=usd&ids=akropolis&per_page=100&page=1&sparkline=false";
-let akropolisMarketUrl = BASE_URL + AKROPOLIS_MARKET_ENDPOINT;
+let MARKET_DATA_ENDPOINT = "/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false";
+let marketUrl = BASE_URL + MARKET_DATA_ENDPOINT;
 
-fetch(akropolisMarketUrl)
-.then( res => {
-  res.json().then( data => {
-    $("#coinLogo").attr("src", data[0].image);
-    if (data[0].market_cap_change_24h >= 0) {
-      $("#marketCap").css("color", "green");
-      $("#marketCap").html("The MarketCap of " + data[0].name + " increased by " + Math.abs((data[0].market_cap_change_24h / 1.0e+6).toFixed(0)) + " million dollars in the last 24h.");
-    } else {
-      $("#marketCap").css("color", "red");
-      $("#marketCap").html("The MarketCap of " + data[0].name + "decreased by " + Math.abs((data[0].market_cap_change_24h / 1.0e+6).toFixed(0)) + " million dollars in the last 24h.");
-    }
-  })
+
+
+function generateTableBody(table, data) {
+  data.forEach(
+    $("<tr></tr").html;
+    $("<td>").text(data.market_cap_rank)
+    $("<td>").text(data.name)
+    $("<td>").text(data.market_cap)
+    $("<td>").text(data.current_price)
+    $("<td>").text(data.total_volume) //24h Volume
+    $("<td>").text(data.circulating_supply)
+    $("<td>").text(data.market_cap_change_24h)
+  )
+}
+
+
+
+$(document).ready(function() {
+  fetch(marketUrl)
+  .then( res => {
+    res.json().then( res => {
+      generateTableBody($("#coinTable"), res)
+    })
 })
 .catch( err => {
-  $("#marketCap").html(err);
+  console.log(err);
+});
 });
