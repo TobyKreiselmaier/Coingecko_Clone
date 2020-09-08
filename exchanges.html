@@ -1,10 +1,6 @@
 <!doctype html>
 <html lang="en">
-<!-- To add: 
-* Tabs: coins, exchanges
-* Pagination so you can venture deep into the altcoin forest
-* Column sorting would be awesome
-* Bonus would be coin detail pages linked from the coin name-->
+ 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,8 +16,8 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
     integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
     crossorigin="anonymous"></script>
-  <script src="logic.js"></script>
-  <title>CoinGecko Clone Project</title>
+  <script src="exchanges.js"></script>
+  <title>CoinGecko Clone Project - Exchange Page</title>
 </head>
 
 <body>
@@ -31,17 +27,17 @@
         src="https://i.ytimg.com/vi/DcAafccz64g/maxresdefault.jpg" width="70"></h1>
     <h6 class="font-weight-bold text-center">Results powered by CoinGecko API</h6>
     <hr><br>
-    <h2 class="font-weight-bold text-center">Cryptocurrencies by Market Capitalization</h2>
+    <h2 class="font-weight-bold text-center">Crypto Exchanges by Trust Score Rank</h2>
     <h6 class="font-weight-bold text-center">IvanOnTech Academy Bootcamp Project</h6>
     <hr><br>
 
     <!-- Tabs -->
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a class="nav-link app-tab-link active" id="link-tab-crypto" href="/">Cryptocurrencies</a>
+        <a class="nav-link app-tab-link" id="link-tab-crypto" href="/">Cryptocurrencies</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link app-tab-link" id="link-tab-exchange" href="/exchanges.html">Exchanges</a>
+        <a class="nav-link app-tab-link active" id="link-tab-exchange" href="/exchanges.html">Exchanges</a>
       </li>
 
       <!-- Page Turning -->
@@ -62,14 +58,12 @@
         <tr>
           <th class="text-center" scope="col"><a class="sortable-link">Rank</th>
           <th class="text-center" scope="col"><a class="sortable-link">Name</th>
-          <th class="text-right" scope="col"><a class="sortable-link">Market Cap</th>
-          <th class="text-right" scope="col"><a class="sortable-link">Price</th>
-          <th class="text-right" scope="col"><a class="sortable-link">Volume (24h)</th>
-          <th class="text-right" scope="col"><a class="sortable-link">Circulating Supply</th>
-          <th class="text-right" scope="col"><a class="sortable-link">Change (24h)</th>
+          <th class="text-right" scope="col"><a class="sortable-link">24h Trade Volume</th>
+          <th class="text-right" scope="col"><a class="sortable-link">Est.</th>
+          <th class="text-right" scope="col"><a class="sortable-link">Based In</th>  
         </tr>
       </thead>
-      <tbody id="coinTableBody">
+      <tbody id="exchangeTableBody">
       </tbody>
     </table>
 

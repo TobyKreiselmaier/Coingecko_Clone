@@ -1,8 +1,8 @@
-ethereum.autoRefreshOnNetworkChange = false;
+ethereum.autoRefreshOnNetworkChange = false; //avoids MetaMask errors in console.
 const coinsPerPage = 100;
 const currentPage = 1;
-let BASE_URL = "https://api.coingecko.com/api/v3";
-let MARKET_DATA_ENDPOINT = "/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false";
+let BASE_URL = `https://api.coingecko.com/api/v3`;
+let MARKET_DATA_ENDPOINT = `/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false`;
 let marketUrl = BASE_URL + MARKET_DATA_ENDPOINT;
 
 function generateTableBody(data) {
