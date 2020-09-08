@@ -2,4 +2,4 @@
 
 Week 5 Project - IvanOnTech Academy Bootcamp
 
-Creates a website that fetches data from CoinGecko API and creates a list of the most popular cryptocurrencies.
+Creates a website that fetches data from CoinGecko API and creates a list of the most popular cryptocurrencies and crypto exchanges.
