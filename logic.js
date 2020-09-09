@@ -50,8 +50,8 @@ refreshTableBody();
 
 // Page Turning
 
-let nextButton = $('.app-page-next');
-let prevButton = $('.app-page-prev');
+let nextButton = $("#nButton");
+let prevButton = $("#pButton");
 
 nextButton.click( () => {
     currentPage++;    
