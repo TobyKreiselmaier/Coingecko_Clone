@@ -1,12 +1,13 @@
-ethereum.autoRefreshOnNetworkChange = false; //avoids MetaMask errors in console.
-const exchangesPerPage = 100;
-const currentPage = 1;
+if (ethereum) {ethereum.autoRefreshOnNetworkChange = false}; //avoids MetaMask errors in console.
+let exchangesPerPage = 100;
+let currentPage = 1;
 let BASE_URL = `https://api.coingecko.com/api/v3`;
 let EXCHANGE_DATA_ENDPOINT = `/exchanges?per_page=${exchangesPerPage}&page=${currentPage}`;
 let exchangeUrl = BASE_URL + EXCHANGE_DATA_ENDPOINT;
 
 function generateTableBody(data) {
   let number = Intl.NumberFormat("en-US");
+  $('#exchangeTableBody').html(""); //clears body of table
   for (let key in data) {
     $('#exchangeTableBody').append(
       $('<tr class="content-row"></tr>').append(
@@ -44,3 +45,32 @@ async function refreshTableBody() {
 }
 
 refreshTableBody();
+
+// Pagination
+
+$("#nAnchor").click( () => {
+  currentPage++;    
+  EXCHANGE_DATA_ENDPOINT = `/exchanges?per_page=${exchangesPerPage}&page=${currentPage}`;
+  exchangeUrl = BASE_URL + EXCHANGE_DATA_ENDPOINT;
+  refreshTableBody();
+  fadePrev();
+});
+
+$("#pAnchor").click( () => {
+  currentPage--;
+  EXCHANGE_DATA_ENDPOINT = `/exchanges?per_page=${exchangesPerPage}&page=${currentPage}`;
+  exchangeUrl = BASE_URL + EXCHANGE_DATA_ENDPOINT;
+  refreshTableBody();
+  fadePrev();
+});
+
+function fadePrev() {    
+$("#pageNumber").text("Page: " + currentPage);
+  if (currentPage == 1) {
+    $("#pAnchor").hide();
+  } else {
+    $("#pAnchor").show();
+  }
+}
+
+fadePrev();

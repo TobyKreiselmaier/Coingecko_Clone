@@ -7,6 +7,7 @@ let marketUrl = BASE_URL + MARKET_DATA_ENDPOINT;
 
 function generateTableBody(data) {
   let number = Intl.NumberFormat("en-US");
+  $('#coinTableBody').html(""); //clears body of table
   for (let key in data) {
     $('#coinTableBody').append(
       $('<tr class="content-row"></tr>').append(
@@ -47,13 +48,9 @@ async function refreshTableBody() {
 
 refreshTableBody();
 
+// Pagination
 
-// Page Turning
-
-let nextButton = $("#nButton");
-let prevButton = $("#pButton");
-
-nextButton.click( () => {
+$("#nAnchor").click( () => {
     currentPage++;    
     MARKET_DATA_ENDPOINT = `/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false`;
     marketUrl = BASE_URL + MARKET_DATA_ENDPOINT;
@@ -61,7 +58,7 @@ nextButton.click( () => {
     fadePrev();
 });
 
-prevButton.click( () => {
+$("#pAnchor").click( () => {
     currentPage--;
     MARKET_DATA_ENDPOINT = `/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false`;
     marketUrl = BASE_URL + MARKET_DATA_ENDPOINT;
@@ -70,10 +67,11 @@ prevButton.click( () => {
 });
 
 function fadePrev() {    
+  $("#pageNumber").text("Page: " + currentPage);
     if (currentPage == 1) {
-        prevButton.hide();
+      $("#pAnchor").hide();
     } else {
-        prevButton.show();
+      $("#pAnchor").show();
     }
 }
 
