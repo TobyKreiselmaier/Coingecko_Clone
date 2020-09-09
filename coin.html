@@ -1,10 +1,6 @@
 <!doctype html>
 <html lang="en">
 
-<!-- To add: 
-* Column sorting
-* Coin detail pages-->
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +16,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
     integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
     crossorigin="anonymous"></script>
-  <title>CoinGecko Clone Project</title>
+  <title>CoinGecko Clone Project - Coin Page</title>
 </head>
 
 <body>
@@ -30,7 +26,7 @@
         src="https://images-na.ssl-images-amazon.com/images/I/41EWrUly5FL._AC_UL160_SR148,160_.jpg" width="70"></h1>
     <h6 class="font-weight-bold text-center">Results powered by CoinGecko API</h6>
     <hr><br>
-    <h2 class="font-weight-bold text-center">Cryptocurrencies by Market Capitalization</h2>
+    <h2 class="font-weight-bold text-center">Detailed Coin Information</h2>
     <h6 class="font-weight-bold text-center">IvanOnTech Academy Bootcamp Project</h6>
     <hr><br>
 
@@ -42,41 +38,12 @@
       <li class="nav-item">
         <a class="nav-link app-tab-link" href="/exchanges.html">Exchanges</a>
       </li>
+     </ul>
 
-      <!-- Pagination -->
-      <li class="nav-item ml-auto">
-        <nav aria-label="Page navigation">
-          <ul class="pagination justify-content-end">
-            <li class="page-item">
-              <a id="pageNumber" class="page-link app-page-next" href="#"></a>
-            </li>
-            <li class="page-item">
-              <a id="nAnchor" class="page-link app-page-next" href="#">Next 100</a>
-            </li>
-            <li class="page-item">
-              <a id="pAnchor" class="page-link app-page-prev" href="#">Previous 100</a>
-            </li>
-          </ul>
-        </nav>
-      </li>
+    <!-- Unordered List -->
+    <ul class="list-group" id="coinList">
+      <li class="list-group-item">Test</li>
     </ul>
-
-    <!-- Table -->
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th class="text-center" scope="col"><a class="sortable-link">Rank</th>
-            <th class="text-center" scope="col"><a class="sortable-link">Name</th>
-            <th class="text-right" scope="col"><a class="sortable-link">Market Cap</th>
-            <th class="text-right" scope="col"><a class="sortable-link">Price</th>
-            <th class="text-right" scope="col"><a class="sortable-link">Volume (24h)</th>
-            <th class="text-right" scope="col"><a class="sortable-link">Circulating Supply</th>
-            <th class="text-right" scope="col"><a class="sortable-link">Change (24h)</th>
-          </tr>
-        </thead>
-        <tbody id="coinTableBody">
-        </tbody>
-      </table>
 
     <!-- Imprint -->
     <br>
@@ -85,7 +52,7 @@
       Written by <a href="mailto:the.rainmaker@mail.com" target="_blank">The Rainmaker</a><br>
     </address>
   </div>
-  <script src="index.js"></script>
+  <script src="coin.js"></script>
 </body>
 
 </html>

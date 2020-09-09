@@ -1,6 +1,7 @@
 if (ethereum) {ethereum.autoRefreshOnNetworkChange = false}; //avoids MetaMask errors in console.
 let coinsPerPage = 100;
 let currentPage = 1;
+let specificCoin = "";
 let BASE_URL = `https://api.coingecko.com/api/v3`;
 let MARKET_DATA_ENDPOINT = `/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false`;
 let marketUrl = BASE_URL + MARKET_DATA_ENDPOINT;
@@ -12,9 +13,9 @@ function generateTableBody(data) {
     $('#coinTableBody').append(
       $('<tr class="content-row"></tr>').append(
         $('<td class="text-center"></td>').text(data[key].market_cap_rank),
-        $('<td class="text-left"></td>').append(
+        $('<td id="specific" class="text-left"></td>').append(
           $('<div></div>').append(
-            `<img src="${data[key].image}" width="16"> ${data[key].name}`
+            `<img src="${data[key].image}" width="16"><a href="/coin.html"> ${data[key].name}</a>`
             )
           ),
         $('<td class="text-right"></td>').text("$" + number.format(data[key].market_cap)),
@@ -47,6 +48,12 @@ async function refreshTableBody() {
 }
 
 refreshTableBody();
+
+//Coin ID for correct API call of the coin
+
+$("#specific").click( () => {
+  specificCoin = data[key].id;
+})
 
 // Pagination
 
