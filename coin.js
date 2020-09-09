@@ -6,7 +6,6 @@ let coinUrl = BASE_URL + COIN_DATA_ENDPOINT;
 
 function generateListElements(data) {
   let number = Intl.NumberFormat("en-US");
-  debugger;
   $('#coinList').html(""); //clears list
   $('#coinList').append(
     $('<li class="list-group-item"></li>').text("Name: " + data.name),
@@ -15,14 +14,13 @@ function generateListElements(data) {
     $('<li class="list-group-item"></li>').text("Description: " + data.description.en),
     $('<li class="list-group-item"></li>').text("Homepage: " + data.links.homepage[0]),
     $('<li class="list-group-item"></li>').text("Genesis: " + data.genesis_date),  
-    $('<li class="list-group-item"></li>').text("All Time High: " + "$" + Number.format(data.ath.usd)),    
-    $('<li class="text-danger list-group-item"></li>').text("From ATH: " + Number(data.ath_change_percentage.usd).toFixed(2) + "%"),  
+    $('<li class="list-group-item"></li>').text("All Time High: " + "$" + number.format(data.market_data.ath.usd)),    
+    $('<li class="text-danger list-group-item"></li>').text("From ATH: " + Number(data.market_data.ath_change_percentage.usd).toFixed(2) + "%"),  
   );
 }
 
 function getApiData() {
-  $(document).ready(function() {
-    fetch(coinUrl)
+  fetch(coinUrl)
     .then( res => {
       res.json().then( res => {
         generateListElements(res);
@@ -31,12 +29,14 @@ function getApiData() {
   .catch( err => {
     console.log(err);
   });
-  });
 };
 
 async function refreshListElements() {
-  let content = await getApiData();
-  generateListElements(content);
+  getApiData();
 }
 
 refreshListElements();
+
+function toggleMode() {
+  document.body.classList.toggle("dark-mode");
+}

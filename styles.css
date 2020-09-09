@@ -1,3 +1,8 @@
 .clone {
   border-radius: 50%;
 }
+
+.dark-mode {
+  background-color: rgb(26, 23, 23);
+  color: rgb(18, 128, 18);
+}

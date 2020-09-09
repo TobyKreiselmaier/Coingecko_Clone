@@ -26,22 +26,19 @@ function generateTableBody(data) {
 }
 
 function getApiData() {
-  $(document).ready(function() {
-    fetch(exchangeUrl)
+  fetch(exchangeUrl)
     .then( res => {
       res.json().then( res => {
         generateTableBody(res);
       })
-  })
-  .catch( err => {
-    console.log(err);
-  });
-  });
+    })
+    .catch( err => {
+      console.log(err);
+    });
 };
 
 async function refreshTableBody() {
-  let content = await getApiData();
-  generateTableBody(content);
+  getApiData();
 }
 
 refreshTableBody();
@@ -74,3 +71,7 @@ $("#pageNumber").text("Page: " + currentPage);
 }
 
 fadePrev();
+
+function toggleMode() {
+  document.body.classList.toggle("dark-mode");
+}

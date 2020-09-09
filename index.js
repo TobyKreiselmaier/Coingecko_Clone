@@ -28,31 +28,22 @@ function generateTableBody(data) {
 }
 
 function getApiData() {
-  $(document).ready(function() {
     fetch(marketUrl)
     .then( res => {
       res.json().then( res => {
         generateTableBody(res);
       })
-  })
-  .catch( err => {
-    console.log(err);
-  });
-  });
+    })
+    .catch( err => {
+      console.log(err);
+    });
 };
 
 async function refreshTableBody() {
-  let content = await getApiData();
-  generateTableBody(content);
+  getApiData();
 }
 
 refreshTableBody();
-
-//Coin ID for correct API call of the coin
-
-$("#specific").click( () => {
-  coinID = data[key].id;
-})
 
 // Pagination
 
@@ -82,3 +73,7 @@ function fadePrev() {
 }
 
 fadePrev();
+
+function toggleMode() {
+  document.body.classList.toggle("dark-mode");
+}
