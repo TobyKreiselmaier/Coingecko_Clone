@@ -83,18 +83,19 @@ function toggleMode() {
 /* Sorting
 
    Table headers can be accessed through the class 'sortable' to connect a click event handler
-   Each column has a unique name by which it can be identified. */
+   Each column has a unique name by which it can be identified. 
+   The data comes presorted by Market Cap in descending order as defined in URL endpoint.*/
+
+let sortOrder = {column: 'market_cap', order: 'DESC'};
 
 $('a.sortable').click( () => {
-  let order = getSortOrder($('this').name);
-  sortCoinList($('this').name, order);
+  let order = getSortOrder($('this').prevObject[0].activeElement.name);
+  sortCoinList($('this').prevObject[0].activeElement.name, order);
 });
 
-let lastSort = {column: 'market_cap', order: 'DESC'};
-
 function getSortOrder(columnName) {
-  if (lastSort.column == columnName) {
-      if (lastSort.order == 'DESC') {
+  if (sortOrder.column == columnName) {
+      if (sortOrder.order == 'DESC') {
           return 'ASC';
       }
       return 'DESC';
@@ -102,32 +103,32 @@ function getSortOrder(columnName) {
   return 'ASC';
 }
 
-async function sortCoinList(headerID, order) {
-  data = await getApiData();
-  sortData(data, headerID, order);
-  createCoinTable(data);
+async function sortCoinList(headerName, order) {
+  data = getApiData();
+  sortData(data, headerName, order);
+  generateTableBody(data);
 }
 
-function updateSortOrder(headerID, order) {
-  lastSort.column = headerID;
-  lastSort.order = order;
+function updateSortOrder(headerName, order) {
+  sortOrder.column = headerName;
+  sortOrder.order = order;
 }
 
-function sortData(data, headerID, order) {
+function sortData(data, headerName, order) {
   if (order == 'ASC') {
-      sortAscending(data, headerID);
+      sortAscending(data, headerName);
   } else {
-      sortDescending(data, headerID);
+      sortDescending(data, headerName);
   };
-  updateSortOrder(headerID, order);
+  updateSortOrder(headerName, order);
   return data;
 }
 
-function sortAscending(data, headerID) {
+function sortAscending(data, headerName) {
   data.sort(function (a, b) {
-      if (a[headerID] > b[headerID]) {
+      if (a[headerName] > b[headerName]) {
           return 1;
-      } else if (a[headerID] < b[headerID]) {
+      } else if (a[headerName] < b[headerName]) {
           return -1;
       } else {
           return 0;
@@ -136,11 +137,11 @@ function sortAscending(data, headerID) {
   return data;
 }
 
-function sortDescending(data, headerID) {
+function sortDescending(data, headerName) {
   data.sort(function (a, b) {
-      if (a[headerID] > b[headerID]) {
+      if (a[headerName] > b[headerName]) {
           return -1;
-      } else if (a[headerID] < b[headerID]) {
+      } else if (a[headerName] < b[headerName]) {
           return 1;
       } else {
           return 0;
