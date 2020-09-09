@@ -1,11 +1,12 @@
-if (ethereum) {ethereum.autoRefreshOnNetworkChange = false}; //avoids MetaMask errors in console.
+if (ethereum) {ethereum.autoRefreshOnNetworkChange = false;}; //avoids MetaMask errors in console.
+let coinID = location.search.slice(1);
 let BASE_URL = `https://api.coingecko.com/api/v3`;
-let COIN_DATA_ENDPOINT = `/coins/${specificCoin}?tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false`;
+let COIN_DATA_ENDPOINT = `/coins/${coinID}?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false`;
 let coinUrl = BASE_URL + COIN_DATA_ENDPOINT;
 
 function generateListElements(data) {
-  debugger;
   let number = Intl.NumberFormat("en-US");
+  debugger;
   $('#coinList').html(""); //clears list
   $('#coinList').append(
     $('<li class="list-group-item"></li>').text("Name: " + data.name),
