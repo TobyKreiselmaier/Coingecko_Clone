@@ -74,6 +74,77 @@ function fadePrev() {
 
 fadePrev();
 
+//Dark Mode changes CSS using the class 'dark-mode'
+
 function toggleMode() {
   document.body.classList.toggle("dark-mode");
+}
+
+/* Sorting
+
+   Table headers can be accessed through the class 'sortable' to connect a click event handler
+   Each column has a unique name by which it can be identified. */
+
+$('a.sortable').click( () => {
+  let order = getSortOrder($('this').name);
+  sortCoinList($('this').name, order);
+});
+
+let lastSort = {column: 'market_cap', order: 'DESC'};
+
+function getSortOrder(columnName) {
+  if (lastSort.column == columnName) {
+      if (lastSort.order == 'DESC') {
+          return 'ASC';
+      }
+      return 'DESC';
+  }
+  return 'ASC';
+}
+
+async function sortCoinList(headerID, order) {
+  data = await getApiData();
+  sortData(data, headerID, order);
+  createCoinTable(data);
+}
+
+function updateSortOrder(headerID, order) {
+  lastSort.column = headerID;
+  lastSort.order = order;
+}
+
+function sortData(data, headerID, order) {
+  if (order == 'ASC') {
+      sortAscending(data, headerID);
+  } else {
+      sortDescending(data, headerID);
+  };
+  updateSortOrder(headerID, order);
+  return data;
+}
+
+function sortAscending(data, headerID) {
+  data.sort(function (a, b) {
+      if (a[headerID] > b[headerID]) {
+          return 1;
+      } else if (a[headerID] < b[headerID]) {
+          return -1;
+      } else {
+          return 0;
+      }
+  });
+  return data;
+}
+
+function sortDescending(data, headerID) {
+  data.sort(function (a, b) {
+      if (a[headerID] > b[headerID]) {
+          return -1;
+      } else if (a[headerID] < b[headerID]) {
+          return 1;
+      } else {
+          return 0;
+      }
+  });
+  return data;
 }
