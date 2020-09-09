@@ -1,6 +1,6 @@
-ethereum.autoRefreshOnNetworkChange = false; //avoids MetaMask errors in console.
-const coinsPerPage = 100;
-const currentPage = 1;
+if (ethereum) {ethereum.autoRefreshOnNetworkChange = false}; //avoids MetaMask errors in console.
+let coinsPerPage = 100;
+let currentPage = 1;
 let BASE_URL = `https://api.coingecko.com/api/v3`;
 let MARKET_DATA_ENDPOINT = `/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false`;
 let marketUrl = BASE_URL + MARKET_DATA_ENDPOINT;
@@ -55,12 +55,16 @@ let prevButton = $("#pButton");
 
 nextButton.click( () => {
     currentPage++;    
+    MARKET_DATA_ENDPOINT = `/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false`;
+    marketUrl = BASE_URL + MARKET_DATA_ENDPOINT;
     refreshTableBody();
     fadePrev();
 });
 
 prevButton.click( () => {
     currentPage--;
+    MARKET_DATA_ENDPOINT = `/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false`;
+    marketUrl = BASE_URL + MARKET_DATA_ENDPOINT;
     refreshTableBody();
     fadePrev();
 });
