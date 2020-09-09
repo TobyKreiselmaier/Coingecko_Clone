@@ -46,3 +46,31 @@ async function refreshTableBody() {
 }
 
 refreshTableBody();
+
+
+// Page Turning
+
+let nextButton = $('.app-page-next');
+let prevButton = $('.app-page-prev');
+
+nextButton.click( () => {
+    currentPage++;    
+    refreshTableBody();
+    fadePrev();
+});
+
+prevButton.click( () => {
+    currentPage--;
+    refreshTableBody();
+    fadePrev();
+});
+
+function fadePrev() {    
+    if (currentPage == 1) {
+        prevButton.hide();
+    } else {
+        prevButton.show();
+    }
+}
+
+fadePrev();
