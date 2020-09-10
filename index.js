@@ -28,19 +28,18 @@ function generateTableBody(data) {
 }
 
 function getApiData() {
-  fetch(marketUrl)
+  return fetch(marketUrl)
     .then(res => {
-      res.json().then(res => {
-        generateTableBody(res);
-      });
-    })
-    .catch(err => {
+      return res.json();
+    }).then(data => {
+        return data;
+      }).catch(err => {
       console.log(err);
-    });
+        });
 };
 
 async function refreshTableBody() {
-  getApiData();
+  generateTableBody(await getApiData());
 }
 
 refreshTableBody();
@@ -103,7 +102,7 @@ function getSortOrder(columnName) {
 }
 
 async function sortCoinList(headerName, order) {
-  sortData(getApiData(), headerName, order);
+  generateTableBody(sortData(await getApiData(), headerName, order));
 }
 
 function updateSortOrder(headerName, order) {
