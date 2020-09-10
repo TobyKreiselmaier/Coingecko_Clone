@@ -9,7 +9,7 @@ function generateTableBody(data) {
   let number = Intl.NumberFormat("en-US");
   $('#coinTableBody').html(""); //clears body of table
   for (let key in data) {
-    $('#coinTableBody').append(
+     $('#coinTableBody').append(
       $('<tr class="content-row"></tr>').append(
         $('<td class="text-center"></td>').text(data[key].market_cap_rank),
         $('<td id="specific" class="text-left"></td>').append(
@@ -21,7 +21,7 @@ function generateTableBody(data) {
         $('<td class="text-right"></td>').text("$" + number.format(data[key].current_price)),
         $('<td class="text-right"></td>').text("$" + number.format(data[key].total_volume)),
         $('<td class="text-right"></td>').text(number.format(data[key].circulating_supply.toFixed()) + " " + data[key].symbol.toUpperCase()),
-        $(`<td class='${data[key].price_change_percentage_24h >= 0 ? "text-success" : "text-danger"} text-right'></td>`).text(Number(data[key].market_cap_change_percentage_24h).toFixed(2) + "%")
+        $(`<td class='${data[key].price_change_percentage_24h >= 0 ? "text-success" : "text-danger"} text-right'></td>`).text(Number(data[key].price_change_percentage_24h).toFixed(2) + "%")
       )
     );
   };
