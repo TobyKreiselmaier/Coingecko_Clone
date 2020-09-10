@@ -32,7 +32,7 @@ function getApiData() {
     .then( res => {
       res.json().then( res => {
         generateTableBody(res);
-      })
+      });
     })
     .catch( err => {
       console.log(err);
@@ -89,8 +89,7 @@ function toggleMode() {
 let sortOrder = {column: 'market_cap', order: 'DESC'};
 
 $('a.sortable').click( () => {
-  let order = getSortOrder($('this').prevObject[0].activeElement.name);
-  sortCoinList($('this').prevObject[0].activeElement.name, order);
+  sortCoinList($('this').prevObject[0].activeElement.name, getSortOrder($('this').prevObject[0].activeElement.name));
 });
 
 function getSortOrder(columnName) {
@@ -104,9 +103,7 @@ function getSortOrder(columnName) {
 }
 
 async function sortCoinList(headerName, order) {
-  data = getApiData();
-  sortData(data, headerName, order);
-  generateTableBody(data);
+  sortData(getApiData(), headerName, order);
 }
 
 function updateSortOrder(headerName, order) {

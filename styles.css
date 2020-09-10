@@ -2,7 +2,23 @@
   border-radius: 50%;
 }
 
+#coinTableBody {
+  color: rgb(0, 144, 180);
+}
+
+#exchangeTableBody {
+  color: rgb(0, 144, 180);
+}
+
+#coinList {
+  color: rgb(0, 144, 180);
+}
+
 .dark-mode {
   background-color: rgb(26, 23, 23);
   color: rgb(18, 128, 18);
+}
+
+.dark-mode .list-group-item {
+  background-color: rgb(26, 23, 23);
 }
