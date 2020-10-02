@@ -2,10 +2,24 @@ if (ethereum) { ethereum.autoRefreshOnNetworkChange = false }; //avoids MetaMask
 let coinsPerPage = 100;
 let currentPage = 1;
 let BASE_URL = `https://api.coingecko.com/api/v3`;
-let MARKET_DATA_ENDPOINT = `/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false`;
+let COIN_DATA_ENDPOINT = `/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false`;
+let MARKET_DATA_ENDPOINT = `/global`;
+let coinUrl = BASE_URL + COIN_DATA_ENDPOINT;
 let marketUrl = BASE_URL + MARKET_DATA_ENDPOINT;
 
-function generateTableBody(data) {
+function generateMarketTableBody(data) {
+  let number = Intl.NumberFormat("en-US");
+  $('#coinSpan').text(data.data.active_cryptocurrencies);
+  $('#exchangesSpan').text(data.data.markets);
+  $('#totalMarketCapSpan').text("$" + number.format(data.data.total_market_cap.usd.toFixed(0)));
+  $('#totalMarketCapSpanPercent').addClass(`${data.market_cap_change_percentage_24h_usd >= 0 ? "text-success" : "text-danger"}`);
+  $('#totalMarketCapSpanPercent').text(" " + (data.data.market_cap_change_percentage_24h_usd).toFixed(2) + "%");
+  $('#_24hVolSpan').text("$" + number.format(data.data.total_volume.usd.toFixed(0)));
+  $('#btcSpan').text("BTC " + Number(data.data.market_cap_percentage.btc).toFixed(1) +"%");
+  $('#ethSpan').text(" | ETH " + Number(data.data.market_cap_percentage.eth).toFixed(1) +"%");
+}
+
+function generateCoinTableBody(data) {
   let number = Intl.NumberFormat("en-US");
   $('#coinTableBody').html(""); //clears body of table
   for (let key in data) {
@@ -27,7 +41,7 @@ function generateTableBody(data) {
   };
 }
 
-function getApiData() {
+function getMarketData() {
   return fetch(marketUrl)
     .then(res => {
       return res.json();
@@ -38,26 +52,44 @@ function getApiData() {
         });
 };
 
-async function refreshTableBody() {
-  generateTableBody(await getApiData());
+function getCoinData() {
+  return fetch(coinUrl)
+    .then(res => {
+      return res.json();
+    }).then(data => {
+        return data;
+      }).catch(err => {
+      console.log(err);
+        });
+};
+
+async function refreshMarketTableBody() {
+  generateMarketTableBody(await getMarketData());
 }
 
-refreshTableBody();
+refreshMarketTableBody();
+
+
+async function refreshCoinTableBody() {
+  generateCoinTableBody(await getCoinData());
+}
+
+refreshCoinTableBody();
 
 // Pagination
 
 $("#nAnchor").click(() => {
   currentPage++;
-  MARKET_DATA_ENDPOINT = `/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false`;
-  marketUrl = BASE_URL + MARKET_DATA_ENDPOINT;
+  COIN_DATA_ENDPOINT = `/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false`;
+  coinUrl = BASE_URL + COIN_DATA_ENDPOINT;
   refreshTableBody();
   fadePrev();
 });
 
 $("#pAnchor").click(() => {
   currentPage--;
-  MARKET_DATA_ENDPOINT = `/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false`;
-  marketUrl = BASE_URL + MARKET_DATA_ENDPOINT;
+  COIN_DATA_ENDPOINT = `/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false`;
+  coinUrl = BASE_URL + COIN_DATA_ENDPOINT;
   refreshTableBody();
   fadePrev();
 });
@@ -102,7 +134,8 @@ function getSortOrder(columnName) {
 }
 
 async function sortCoinList(headerName, order) {
-  generateTableBody(sortData(await getApiData(), headerName, order));
+  generateCoinTableBody(sortData(await getCoinData
+  (), headerName, order));
 }
 
 function updateSortOrder(headerName, order) {

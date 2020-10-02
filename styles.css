@@ -2,8 +2,19 @@
   border-radius: 50%;
 }
 
+.boldText {
+  font-weight: bold;
+}
+
+#globalTableBody {
+  color: rgb(0, 144, 180);
+  font-size: 0.9em;
+
+}
+
 #coinTableBody {
   color: rgb(0, 144, 180);
+  font-size: 0.9em;
 }
 
 #exchangeTableBody {
