@@ -1,7 +1,19 @@
-# CMC_Clone
+# CoinGecko Clone
 
-Week 5 Project - IvanOnTech Academy Bootcamp
+This project demonstrates use of the following technologies:
 
-Creates a website that fetches data from CoinGecko API and creates a list of the most popular cryptocurrencies and crypto exchanges.
+* HTML5
+* CSS3
+* JavaScript
+* Bootstrap
+* jQuery
 
-Additionally, detailed information on each coin is available and now also a darkmode.
+Functionality:
+
+* Live Coin & Cryptoexchange data
+* CoinGecko API calls
+* Pagination
+* Data sorting
+* Darkmode
+
+Life demonstration: https://coingecko-clone.netlify.app

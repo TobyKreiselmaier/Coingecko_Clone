@@ -1,35 +1,77 @@
-.clone {
-  border-radius: 50%;
+/* HTML elements*/
+a:visited {
+  color: #007BFF;
+  text-decoration: none;
 }
 
+a:link {
+  color: green;
+  text-decoration: none;
+}
+
+a:hover {
+  color: red;
+  text-decoration: underline;
+}
+
+a:active {
+  color: yellow;
+  text-decoration: underline;
+}
+
+/* Class elements*/
 .boldText {
   font-weight: bold;
 }
 
-#globalTableBody {
-  color: rgb(0, 144, 180);
-  font-size: 0.9em;
-
-}
-
-#coinTableBody {
-  color: rgb(0, 144, 180);
-  font-size: 0.9em;
-}
-
-#exchangeTableBody {
-  color: rgb(0, 144, 180);
-}
-
-#coinList {
-  color: rgb(0, 144, 180);
+.clone {
+  border-radius: 50%;
 }
 
 .dark-mode {
   background-color: rgb(26, 23, 23);
-  color: rgb(18, 128, 18);
+  color: #007BFF;
 }
 
 .dark-mode .list-group-item {
   background-color: rgb(26, 23, 23);
+  color: #007BFF;
+}
+
+.dark-mode .nav-item .active {
+  background-color: rgb(26, 23, 23);
+  color: #007BFF;
+}
+
+.dark-mode #nAnchor {
+  background-color: rgb(26, 23, 23);
+  color: #007BFF;
+}
+
+.dark-mode #pageNumber {
+  background-color: rgb(26, 23, 23);
+  color: #007BFF;
+}
+
+.dark-mode #pAnchor {
+  background-color: rgb(26, 23, 23);
+  color: #007BFF;
+}
+
+/* ID elements*/
+#coinList {
+  color: black;
+}
+
+#coinTableBody {
+  color: #007BFF;
+}
+
+#exchangeTableBody {
+  color: #007BFF;
+}
+
+#globalTableBody {
+  color: #007BFF;
+  font-size: 0.9em;
 }
