@@ -24,7 +24,7 @@ function generateTableBody(data, price) {
         $('<td class="text-left"></td>').append(
           $('<div></div>').append(`<img src="${data[key].image}" width="25"> 
             ${data[key].name}`)),
-        $('<td class="text-right"></td>').text("$ " + 
+        $('<td class="text-right"></td>').text("$" + 
           number.format((data[key].trade_volume_24h_btc*price).toFixed(2))),
         $('<td class="text-right"></td>').text(data[key].year_established),
         $('<td class="text-right"></td>').text(data[key].country)
