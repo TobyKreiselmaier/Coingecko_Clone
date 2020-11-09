@@ -6,9 +6,8 @@ let COIN_DATA_ENDPOINT =
 let coinUrl = BASE_URL + COIN_DATA_ENDPOINT;
 
 $(document).ready( () => {
-  if(localStorage.getItem("Darkmode")){
-    document.body.classList.toggle("dark-mode");
-    getApiData();
+  document.body.classList.toggle("dark-mode");
+  getApiData();
   }
 });
 

@@ -10,22 +10,11 @@ let marketUrl = BASE_URL + MARKET_DATA_ENDPOINT;
 let sortOrder = { column: 'market_cap', order: 'DESC' };
 
 $(document).ready( () => {
-  if(localStorage.getItem("Darkmode")){
-    document.body.classList.toggle("dark-mode");
-  }
+  document.body.classList.toggle("dark-mode");
   refreshMarketTableBody();
   refreshCoinTableBody();
   fadePrev();
 });
-
-function toggleMode() {
-  document.body.classList.toggle("dark-mode");
-  if($('input').attr("checked", true)) {
-    localStorage.setItem("Darkmode", "true");
-  } else {
-    localStorage.setItem("Darkmode", "false");
-  }
-}
 
 function generateMarketTableBody(data) {
   let number = Intl.NumberFormat("en-US");
