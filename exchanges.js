@@ -3,8 +3,11 @@ let exchangesPerPage = 100;
 let currentPage = 1;
 let BASE_URL = `https://api.coingecko.com/api/v3`;
 let EXCHANGE_DATA_ENDPOINT = `/exchanges?per_page=${exchangesPerPage}&page=${currentPage}`;
-let btcUrl = BASE_URL + `/simple/price?ids=bitcoin&vs_currencies=USD`;
+let MARKET_DATA_ENDPOINT = `/global`;
+let BTC_ENDPOINT = `/simple/price?ids=bitcoin&vs_currencies=USD`;
 let exchangeUrl = BASE_URL + EXCHANGE_DATA_ENDPOINT;
+let marketUrl = BASE_URL + MARKET_DATA_ENDPOINT;
+let btcUrl = BASE_URL + BTC_ENDPOINT;
 let price;
 let sortOrder = { column: 'trust_score_rank', order: 'ASC' };
 
@@ -12,6 +15,7 @@ $(document).ready( () => {
   document.body.classList.toggle("dark-mode");
   fadePrev();
   refreshTableBody();
+  refreshMarketTableBody();
 });
 
 function generateTableBody(data, price) {
@@ -23,7 +27,7 @@ function generateTableBody(data, price) {
         $('<td class="text-center"></td>').text(data[key].trust_score_rank),
         $('<td class="text-left"></td>').append(
           $('<div></div>').append(`<img src="${data[key].image}" width="25"> 
-            ${data[key].name}`)),
+          <a href="${data[key].url}" target="_blank">${data[key].name}</a>`)),
         $('<td class="text-right"></td>').text("$" + 
           number.format((data[key].trade_volume_24h_btc*price).toFixed(2))),
         $('<td class="text-right"></td>').text(data[key].year_established),
@@ -61,8 +65,35 @@ async function refreshTableBody() {
   generateTableBody(await getApiData(), price);
 };
 
-// Pagination
+function generateMarketTableBody(data) {
+  let number = Intl.NumberFormat("en-US");
+  $('#coinSpan').text(data.data.active_cryptocurrencies);
+  $('#exchangesSpan').text(data.data.markets);
+  $('#totalMarketCapSpan').text("$" + number.format(data.data.total_market_cap.usd.toFixed(0)));
+  $('#totalMarketCapSpanPercent').addClass(`${data.market_cap_change_percentage_24h_usd >= 0 ?
+     "text-success" : "text-danger"}`);
+  $('#totalMarketCapSpanPercent').text(" " + (data.data.market_cap_change_percentage_24h_usd).toFixed(2) + "%");
+  $('#_24hVolSpan').text("$" + number.format(data.data.total_volume.usd.toFixed(0)));
+  $('#btcSpan').text("BTC " + Number(data.data.market_cap_percentage.btc).toFixed(1) +"%");
+  $('#ethSpan').text(" | ETH " + Number(data.data.market_cap_percentage.eth).toFixed(1) +"%");
+};
 
+function getMarketData() {
+  return fetch(marketUrl)
+    .then(res => {
+      return res.json();
+    }).then(data => {
+        return data;
+      }).catch(err => {
+      console.log(err);
+        });
+};
+
+async function refreshMarketTableBody() {
+  generateMarketTableBody(await getMarketData());
+};
+
+// Pagination
 $("#nAnchor").click(() => {
   currentPage++;
   EXCHANGE_DATA_ENDPOINT = `/exchanges?per_page=${exchangesPerPage}&page=${currentPage}`;
