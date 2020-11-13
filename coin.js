@@ -8,7 +8,6 @@ let coinUrl = BASE_URL + COIN_DATA_ENDPOINT;
 $(document).ready( () => {
   document.body.classList.toggle("dark-mode");
   getApiData();
-  }
 });
 
 function generateListElements(data) {
@@ -16,6 +15,10 @@ function generateListElements(data) {
   $('#coinList').html(""); //clears list
   $('#coinList').append(
     $('<li class="list-group-item"></li>').text("Name: " + data.name),
+    $('<li class="list-group-item"></li>').html(
+      `<coingecko-coin-price-chart-widget  coin-id="${data.name}" currency="usd" height="300" locale="en" background-color="#1A1717"></coingecko-coin-price-chart-widget>`),
+    $('<li class="list-group-item"></li>').html(
+      `<coingecko-coin-market-ticker-list-widget  coin-id="${data.name}" currency="usd" height="300" locale="en" background-color="#1A1717"></coingecko-coin-market-ticker-list-widget>`),
     $('<li class="list-group-item"></li>').text("Blocktime: " + 
       data.block_time_in_minutes + " minutes"),
     $('<li class="list-group-item"></li>').text("Algorithm: " + 
