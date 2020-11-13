@@ -36,12 +36,13 @@ function generateCoinTableBody(data) {
      $('#coinTableBody').append(
       $('<tr class="content-row"></tr>').append(
         $('<td class="text-center"></td>').text(data[key].market_cap_rank),
+        $('<td class="text-center"></td>').html('<input type="checkbox">'),
         $('<td id="specific" class="text-left"></td>').append(
           $('<div></div>').append(
             `<img src="${data[key].image}" width="25"> <a href="/coin.html?${data[key].id}">
             ${data[key].name}</a>`)),
+        $('<td class="text-right boldText"></td>').text("$" + number.format(data[key].current_price.toFixed(2))),
         $('<td class="text-right"></td>').text("$" + number.format(data[key].market_cap)),
-        $('<td class="text-right"></td>').text("$" + number.format(data[key].current_price)),
         $('<td class="text-right"></td>').text("$" + number.format(data[key].total_volume)),
         $('<td class="text-right"></td>').text(number.format(data[key].circulating_supply.toFixed()) + 
         " " + data[key].symbol.toUpperCase()),
