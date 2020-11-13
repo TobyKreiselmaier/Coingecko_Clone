@@ -27,7 +27,7 @@ function generateTableBody(data, price) {
         $('<td class="text-center"></td>').text(data[key].trust_score_rank),
         $('<td class="text-left"></td>').append(
           $('<div></div>').append(`<img src="${data[key].image}" width="25"> 
-            ${data[key].name}`)),
+          <a href="${data[key].url}" target="_blank">${data[key].name}</a>`)),
         $('<td class="text-right"></td>').text("$" + 
           number.format((data[key].trade_volume_24h_btc*price).toFixed(2))),
         $('<td class="text-right"></td>').text(data[key].year_established),
