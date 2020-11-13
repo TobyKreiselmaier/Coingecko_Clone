@@ -36,7 +36,6 @@ function generateCoinTableBody(data) {
      $('#coinTableBody').append(
       $('<tr class="content-row"></tr>').append(
         $('<td class="text-center"></td>').text(data[key].market_cap_rank),
-        $('<td class="text-center"></td>').html('<input type="checkbox">'),
         $('<td id="specific" class="text-left"></td>').append(
           $('<div></div>').append(
             `<img src="${data[key].image}" width="25"> <a href="/coin.html?${data[key].id}">
